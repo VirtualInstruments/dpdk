@@ -3409,6 +3409,8 @@ igbvf_dev_close(struct rte_eth_dev *dev)
 				     eth_igbvf_interrupt_handler,
 				     (void *)dev);
 
+	rte_pci_unmap_device(pci_dev);
+
 	return 0;
 }
 
