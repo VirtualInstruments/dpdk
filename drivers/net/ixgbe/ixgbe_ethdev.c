@@ -5531,6 +5531,8 @@ ixgbevf_dev_close(struct rte_eth_dev *dev)
 	rte_intr_callback_unregister(intr_handle,
 				     ixgbevf_dev_interrupt_handler, dev);
 
+	rte_pci_unmap_device(pci_dev);
+
 	return ret;
 }
 
