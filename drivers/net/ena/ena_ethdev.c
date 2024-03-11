@@ -879,6 +879,8 @@ static int ena_close(struct rte_eth_dev *dev)
 				     ena_interrupt_handler_rte,
 				     dev);
 
+	rte_pci_unmap_device(pci_dev);
+
 	/*
 	 * MAC is not allocated dynamically. Setting NULL should prevent from
 	 * release of the resource in the rte_eth_dev_release_port().
