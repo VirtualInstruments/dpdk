@@ -2375,9 +2375,6 @@ static void ena_destroy_device(struct rte_eth_dev *eth_dev)
 
 	ena_com_set_admin_running_state(ena_dev, false);
 
-	if (adapter->state != ENA_ADAPTER_STATE_CLOSED)
-		ena_close(eth_dev);
-
 	ena_com_rss_destroy(ena_dev);
 
 	ena_com_delete_debug_area(ena_dev);
@@ -2388,6 +2385,9 @@ static void ena_destroy_device(struct rte_eth_dev *eth_dev)
 	ena_com_admin_destroy(ena_dev);
 	ena_com_mmio_reg_read_request_destroy(ena_dev);
 	ena_com_delete_customer_metrics_buffer(ena_dev);
+
+	if (adapter->state != ENA_ADAPTER_STATE_CLOSED)
+		ena_close(eth_dev);
 
 	adapter->state = ENA_ADAPTER_STATE_FREE;
 }
